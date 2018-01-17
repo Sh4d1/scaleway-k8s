@@ -4,7 +4,7 @@ kubernetes_apt_key: https://packages.cloud.google.com/apt/doc/apt-key.gpg
 kubernetes_apt_channel: main
 kubernetes_release: xenial
 # versions can be found here
-kubernetes_version: v1.9.0
+kubernetes_version: v1.9.1
 kubernetes_port: 6443
 
 # Calico
@@ -12,4 +12,5 @@ kubernetes_port: 6443
 calico_cidr: 192.168.0.0/16
 calico_manifest: http://docs.projectcalico.org/v2.4/getting-started/kubernetes/installation/hosted/kubeadm/1.6/calico.yaml
 flannel_cidr: 10.244.0.0/16
-flannel_manifest: https://raw.githubusercontent.com/coreos/flannel/v0.9.0/Documentation/kube-flannel.yml
+flannel_manifest: https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
+flannel_arch: arm

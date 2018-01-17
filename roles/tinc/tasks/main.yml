@@ -130,4 +130,3 @@
     when: hostvars[item].vpn_ip is defined
     with_items: "{{ play_hosts }}"
 
-  when: ansible_distribution == "Ubuntu"

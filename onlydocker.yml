@@ -1,0 +1,11 @@
+---
+# Setting up all hosts
+- hosts: proxy:masters:workers
+  tasks: [ ]
+
+# Ready to install docker
+- hosts: proxy:masters:workers
+  roles:
+    - common
+    - docker
+

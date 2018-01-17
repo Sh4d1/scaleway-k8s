@@ -50,7 +50,7 @@
     when: ansible_architecture == item.system_arch
     with_items:
       - { system_arch: 'x86_64', apt_arch: 'amd64' }
-      - { system_arch: 'arm', apt_arch: 'armhf' }
+      - { system_arch: 'armv7l', apt_arch: 'armhf' }
 
   - name: Printing Docker repository
     debug:
@@ -98,4 +98,3 @@
     debug:
       var: docker_version
 
-  when: ansible_distribution == "Ubuntu"

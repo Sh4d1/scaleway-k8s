@@ -36,6 +36,7 @@
   - name: Installing kubernetes core components (kubectl, kubelet ...)
     apt:
       name: "{{ item }}"
+      update_cache: true
       state: latest
     with_items:
       - kubelet
@@ -81,21 +82,27 @@
       - inventory_hostname == groups["masters"][0]
 
   # flannel deployement
-  - name: Getting calico manifest
+  - name: Getting flannel manifest
     get_url:
       url: "{{ flannel_manifest }}"
       dest: /tmp/flannel.yml
     environment:
-      # calico manifest is downloaded via http
+      # flannel manifest is downloaded via http
       http_proxy: "http://{{ hostvars[groups['proxy'][0]]['ansible_tun0']['ipv4']['address'] }}:8888"
       https_proxy: "http://{{ hostvars[groups['proxy'][0]]['ansible_tun0']['ipv4']['address'] }}:8888"
     when:
       - inventory_hostname == groups["masters"][0]
 
+  - name: Changing amd64 to right architecture
+    replace:
+      path: /tmp/flannel.yml
+      regexp: 'amd64'
+      replace: "{{ flannel_arch }}"
+
   - name: Checking if flannel deploy exists
-    shell: "kubectl get deploy --namespace=kube-system  flannel"
+    shell: "kubectl get deploy --namespace=kube-system flanner"
     ignore_errors: True
-    register: calico_deployment
+    register: flannel_deployment
     when: inventory_hostname == groups["masters"][0]
 
   - name: Creating flannel
@@ -127,7 +134,7 @@
   #    - calico_deployment.rc != 0
 
   - name: Getting token
-    shell: "kubeadm token list | tail -f | awk '{print $1}'"
+    shell: "kubeadm token create --print-join-command"
     register: token
     when:
       - inventory_hostname == groups["masters"][0]
@@ -139,11 +146,10 @@
     when: inventory_hostname != groups["masters"]
 
   - name: Joining cluster on other nodes
-    shell: "kubeadm join --token={{ hostvars[groups['masters'][0]]['token'].stdout_lines[1] }} {{ hostvars[groups['masters'][0]]['vpn_ip'] }}:{{ kubernetes_port }}"
+    shell: "{{ hostvars[groups['masters'][0]]['token'].stdout }} {{ hostvars[groups['masters'][0]]['vpn_ip'] }}:{{ kubernetes_port }}"
     when:
      - inventory_hostname != groups["masters"][0]
      - "'/usr/local/bin/kube-proxy' not in kube_proxy_running.stdout"
 
   when:
-    - ansible_distribution == "Ubuntu"
     - groups['masters']|length == 1

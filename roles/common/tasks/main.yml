@@ -15,4 +15,3 @@
       - 50-scw
       - 50-motd-news
 
-  when: ansible_distribution == "Ubuntu"

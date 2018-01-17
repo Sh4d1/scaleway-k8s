@@ -6,8 +6,8 @@
       name: tinyproxy
       state: present
     
-   - name: Add tinyproxy user
-     user:
+  - name: Add tinyproxy user
+    user:
       name: tinyproxy
       state: present
       group: tinyproxy
@@ -22,10 +22,10 @@
       name: tinyproxy
       state: stopped
 
-  - name: Templating /etc/tinyproxy.conf
+  - name: Templating /etc/tinyproxy/tinyproxy.conf
     template:
       src: tinyproxy.conf.j2
-      dest: /etc/tinyproxy.conf
+      dest: /etc/tinyproxy/tinyproxy.conf
     notify: Reload tinyproxy
 
   - name: Ensure tinyproxy is running
@@ -33,4 +33,3 @@
       name: tinyproxy
       state: started
 
-  when: ansible_distribution == "Ubuntu"
