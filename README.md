@@ -1,7 +1,12 @@
+Fork
+=========
+This is a fork from chmod666org/scaleway-k8s.
+My fork uses Debian Stretch, ARM architecture, Rook/Ceph storage, and Traefik as a Kubernetes Ingress.
+
 Setup
 =========
 ```
-git clone https://github.com/chmod666org/scaleway-k8s.git
+git clone https://github.com/Sh4d1/scaleway-k8s.git
 cd scaleway-k8s/terraform
 ```
 Terraform
