@@ -98,6 +98,8 @@
       path: /tmp/flannel.yml
       regexp: 'amd64'
       replace: "{{ flannel_arch }}"
+    when:
+      - inventory_hostname == groups["masters"][0]
 
   - name: Checking if flannel deploy exists
     shell: "kubectl get deploy --namespace=kube-system flanner"
