@@ -1,7 +1,7 @@
 ---
-domain_name: voight-kampff.org
-dashboard_image: gcr.io/google_containers/kubernetes-dashboard-amd64
-dashboard_version: v1.8.1
-init_dashboard_image: gcr.io/google_containers/kubernetes-dashboard-init-amd64
+domain_name: ptrk.io
+dashboard_image: gcr.io/google_containers/kubernetes-dashboard-arm
+dashboard_version: v1.8.2
+init_dashboard_image: gcr.io/google_containers/kubernetes-dashboard-init-arm
 init_dashboard_version: v1.0.1
 basic_auth: True

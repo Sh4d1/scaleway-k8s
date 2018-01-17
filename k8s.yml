@@ -53,26 +53,25 @@
     - docker
 
 # Manual etc when we have more than 1 masters
-- hosts: masters
-  roles:
-    - etcd
+#- hosts: masters
+#  roles:
+#    - etcd
 
 - hosts: proxy:masters:workers
   roles:
     - kubernetes
 
-- hosts: proxy:masters:workers
-  roles:
-    - kubernetes-multimasters
+      #- hosts: proxy:masters:workers
+      #  roles:
+      #    - kubernetes-multimasters
 
 # Deploying ingress controller, lego, dashboard, and helm-monocular
 - hosts: masters:proxy
   roles:
-    - ingress
-    - lego
+    - traefik-ingress
     - kubernetes-dashboard
     #- helm-monocular
 
-- hosts: masters:proxy:workers
-  roles:
-    - heketi-gluster
+      #- hosts: masters:proxy:workers
+      #  roles:
+      #    - heketi-gluster

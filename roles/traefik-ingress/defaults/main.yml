@@ -1,0 +1,7 @@
+traefik_ingress_controller_image: traefik
+traefik_ingress_controller_version: 1.5
+domain_name: ptrk.io
+scaleway_servername1: proxy0
+scaleway_servername2: proxy1
+scaleway_ipaddr: 51.15.214.245
+scaleway_reverse_ipaddr: ptrk.io
