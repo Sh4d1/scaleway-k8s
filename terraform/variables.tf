@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "architecture" {
-  default = "arm"
+  default = "x86_64"
 }
 
 variable "image" {
@@ -11,7 +11,7 @@ variable "image" {
 }
 
 variable "master_instance_type" {
-  default = "C1"
+  default = "VC1S"
 }
 
 variable "master_instance_count" {
@@ -19,7 +19,7 @@ variable "master_instance_count" {
 }
 
 variable "proxy_instance_type" {
-  default = "C1"
+  default = "VC1S"
 }
 
 variable "proxy_instance_count" {
@@ -27,7 +27,7 @@ variable "proxy_instance_count" {
 }
 
 variable "worker_instance_type" {
-  default = "C1"
+  default = "VC1S"
 }
 
 variable "worker_volume_size" {
